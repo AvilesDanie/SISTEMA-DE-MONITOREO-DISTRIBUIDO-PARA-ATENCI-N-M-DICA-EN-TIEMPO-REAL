@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"     # Puerto para conexiones AMQP
+      - "15672:15672"   # Puerto para la interfaz web de administración
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - rabbitmq_net
+
+  cockroach1:
+    image: cockroachdb/cockroach:latest
+    container_name: crdb-node1
+    hostname: crdb-node1  # Importante para el DNS interno
+    ports:
+      - "26257:26257"  # SQL (externo:26257 → interno:26257)
+      - "8080:8080"    # UI
+    volumes:
+      - cockroach1:/cockroach/cockroach-data
+    command: start-single-node --insecure --advertise-addr=crdb-node1
+
+  cockroach2:
+    image: cockroachdb/cockroach:latest
+    container_name: crdb-node2
+    hostname: crdb-node2
+    ports:
+      - "26258:26257"  # SQL (externo:26258 → interno:26257)
+      - "8081:8080"    # UI
+    volumes:
+      - cockroach2:/cockroach/cockroach-data
+    command: start --insecure --store=node2 --listen-addr=0.0.0.0:26257 --http-addr=0.0.0.0:8080 --join=crdb-node1:26257 --advertise-addr=crdb-node2
+
+  cockroach3:
+    image: cockroachdb/cockroach:latest
+    container_name: crdb-node3
+    hostname: crdb-node3
+    ports:
+      - "26259:26257"  # SQL (externo:26259 → interno:26257)
+      - "8082:8080"    # UI
+    volumes:
+      - cockroach3:/cockroach/cockroach-data
+    command: start --insecure --store=node3 --listen-addr=0.0.0.0:26257 --http-addr=0.0.0.0:8080 --join=crdb-node1:26257 --advertise-addr=crdb-node3
+
+volumes:
+  rabbitmq_data:
+  cockroach1:
+  cockroach2:
+  cockroach3:
+
+networks:
+  rabbitmq_net:
+    driver: bridge
+
+
+
+
+
+
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>ec.edu.espe</groupId>
+    <artifactId>microservicios-Distribuidas</artifactId>
+    <version>1.0.0</version>
+    <name>microservicios-Distribuidas</name>
+    <description>Project Microservicios</description>
+
+
+    <modules>
+        <module>ms-eureka-server</module>
+        <module>ms-PatientDataCollector</module>
+        <module>ms-HealthAnalyzer</module>
+        <module>ms-CareNotifier</module>
+        <module>ms-sincronizacion</module>
+        <module>ms-api-gateway</module>
+    </modules>
+
+</project>

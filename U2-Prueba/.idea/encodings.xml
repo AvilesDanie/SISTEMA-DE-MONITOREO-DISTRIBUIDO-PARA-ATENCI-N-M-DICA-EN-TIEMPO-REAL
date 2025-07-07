@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/ms-CareNotifier/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-HealthAnalyzer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-PatientDataCollector/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-api-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-catalogo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-eureka-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-notificaciones/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-publicaciones/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/ms-sincronizacion/src/main/java" charset="UTF-8" />
+  </component>
+</project>
