@@ -1,9 +1,9 @@
 spring:
   application:
-    name: SERVICIO-PATIENDATACOLLECTOR
+    name: SERVICIO-HEALTHANALYZER
 
   datasource:
-    url: jdbc:postgresql://localhost:26257/patientdatacollector_db
+    url: jdbc:postgresql://localhost:26257/healthanalyzer_db
     username: root
     password:
 

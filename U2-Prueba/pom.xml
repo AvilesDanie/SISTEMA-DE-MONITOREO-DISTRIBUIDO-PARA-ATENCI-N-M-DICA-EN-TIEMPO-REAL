@@ -15,7 +15,6 @@
         <module>ms-PatientDataCollector</module>
         <module>ms-HealthAnalyzer</module>
         <module>ms-CareNotifier</module>
-        <module>ms-sincronizacion</module>
         <module>ms-api-gateway</module>
     </modules>
 

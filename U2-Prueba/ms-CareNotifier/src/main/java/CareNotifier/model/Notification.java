@@ -1,33 +1,26 @@
 package CareNotifier.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.ZonedDateTime;
 
 @Entity
-@Table(name = "notifications")
-@Getter
-@Setter
+@Data
 public class Notification {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long notificationId;
+    private String notificationId;
 
-    @Column(nullable = false)
-    private String eventType;
-
-    @Column(nullable = false)
-    private String recipient;
-
-    @Column(nullable = false)
-    private String status;
-
-    @Column(nullable = false)
-    private String priority; // EMERGENCY, WARNING, INFO
-
-    @Column(nullable = false)
+    private String eventType;    // Ej: "AlertEvent" o "DailyReportEvent"
+    private String recipient;    // Ej: "doctor@hospital.com"
+    private String status;       // SENT / FAILED / PENDING
+    private String priority;     // EMERGENCY / WARNING / INFO
+    @Column(name = "payload", columnDefinition = "TEXT")
+    private String payload;
     private ZonedDateTime timestamp;
 }
+

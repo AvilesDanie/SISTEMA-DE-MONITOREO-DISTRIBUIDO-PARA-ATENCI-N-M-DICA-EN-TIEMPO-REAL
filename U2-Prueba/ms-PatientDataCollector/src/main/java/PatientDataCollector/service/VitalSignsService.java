@@ -2,7 +2,9 @@ package PatientDataCollector.service;
 
 import PatientDataCollector.config.RabbitMQConfig;
 import PatientDataCollector.dto.VitalSignsDto;
+import PatientDataCollector.model.EventAudit;
 import PatientDataCollector.model.VitalSigns;
+import PatientDataCollector.repository.EventAuditRepository;
 import PatientDataCollector.repository.VitalSignsRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,6 +27,10 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class VitalSignsService {
+
+    @Autowired
+    private EventAuditRepository eventAuditRepository;
+
 
     @Autowired
     private VitalSignsRepository vitalSignsRepository;
@@ -63,6 +69,19 @@ public class VitalSignsService {
             }
         }
 
+        if ("oxygen".equalsIgnoreCase(dto.getType())) {
+            if (dto.getValue() < 70 || dto.getValue() > 100) {
+                return new ResponseEntity<>("El valor de oxígeno debe estar entre 70 y 100.", HttpStatus.BAD_REQUEST);
+            }
+        }
+
+        if ("blood-pressure".equalsIgnoreCase(dto.getType())) {
+            if (dto.getValue() < 80 || dto.getValue() > 200) {
+                return new ResponseEntity<>("El valor de presión arterial debe estar entre 80 y 200.", HttpStatus.BAD_REQUEST);
+            }
+        }
+
+
         // Conversión segura de fecha
         ZonedDateTime timestamp;
         try {
@@ -96,6 +115,17 @@ public class VitalSignsService {
         } catch (JsonProcessingException e) {
             return new ResponseEntity<>("Error al serializar el evento.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
+        // Persistir auditoría ANTES de enviar
+        EventAudit audit = new EventAudit();
+        audit.setEventId(event.getEventId());
+        audit.setEventType("NewVitalSignEvent");
+        audit.setPayload(jsonEvent);
+        audit.setCreatedAt(ZonedDateTime.now());
+
+        eventAuditRepository.save(audit);
+        log.info("Evento auditado correctamente: {}", event.getEventId());
+
 
         // Intentar enviar evento
         try {

@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/ms-catalogo/pom.xml" />
         <option value="$PROJECT_DIR$/ms-notificaciones/pom.xml" />
         <option value="$PROJECT_DIR$/ms-publicaciones/pom.xml" />
+        <option value="$PROJECT_DIR$/ms-sincronizacion/pom.xml" />
       </set>
     </option>
   </component>
