@@ -1,7 +1,5 @@
 # Proyecto - Instrucciones de instalación y ejecución
 
-## 🐳 Levantar el entorno con Docker Compose
-
 1. Inicia los contenedores:
 
    docker-compose up -d
@@ -44,8 +42,6 @@ Inicia cada microservicio en el siguiente orden:
 4. Patient Data Collector
 5. API Gateway
 
-*Asegúrate de que cada servicio se inicia correctamente antes de continuar con el siguiente.*
-
 ---
 
 ## 🧪 Pruebas con LotusC
@@ -54,7 +50,6 @@ Para ejecutar pruebas, inicia el archivo de configuración de LotusC con el sigu
 
    lotusc run locustfile.py
 
-Reemplaza <nombre-del-archivo> por el archivo de definición de pruebas que vayas a utilizar.
 
 ---
 
